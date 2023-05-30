@@ -183,5 +183,9 @@ Debería mostrar un contenido parecido a un json.
 ## Ver las métricas del proxy.
 
 
-Ingresar a la url 
+Ingresar a la url http://localhost/goaccess/report.html
+
+
+
+
 
