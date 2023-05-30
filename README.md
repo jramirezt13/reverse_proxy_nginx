@@ -8,6 +8,8 @@ Implementación de un proxy inverso con nginx y docker.
 * Docker versión 20.10
 * Docker compose versión 1.25.0
 * Git
+* Nginx
+* Goaccess
 
 ## Instalación
 
@@ -120,5 +122,66 @@ ls
 reverse_proxy_nginx
 ```
 
+## Ejecutar el contenedor.
 
+1. Abrir una terminal e ingresar al directorio donde clono el proyecto y entrar a la carpeta docker.
+
+```bash
+cd /directorio_del_proyecto/reverse_proxy_nginx/docker
+```
+Nota: reemplazar "directorio_del_proyecto" por la ruta donde clono el proyecto.
+
+2. Crear la carpeta "logs" que será usada por el contenedor para alojar los logs que generé la aplicación.
+
+```bash
+mkdir logs
+```
+
+2. Construir el contenedor con docker-compose.
+
+```bash
+docker-compose up --build -d
+```
+
+3. Verificar si levanto correctamente el contenedor
+
+```bash
+docker-compose ps
+
+       Name                      Command               State                    Ports                  
+-------------------------------------------------------------------------------------------------------
+nginx_reverse_proxy   /docker-entrypoint.sh /bin ...   Up      0.0.0.0:443->443/tcp, 0.0.0.0:80->80/tcp
+```
+
+Para probar el funcionamiento del proxy se debe agregar el hostname al DNS local que se encuentra en /etc/hosts.
+
+
+1. Editar el archivo con permisos de root
+
+```bash
+sudo vi /etc/hosts
+```
+
+2. Agregar el hostname "mytestapi.com" al final del archivo y guardas los cambios.
+
+```bash
+127.0.0.1	localhost
+127.0.1.1	jramirez
+
+127.0.1.1	mytestapi.com
+
+```
+
+3. Desde un explorador web ingresar la url:
+
+https://mytestapi.com/sites
+
+Debería mostrar un contenido parecido a un json.
+
+
+ 
+## Ver las métricas del proxy.
+
+
+Ingresar a la url 
 
